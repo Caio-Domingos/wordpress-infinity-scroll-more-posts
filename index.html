@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    .btn {
+      position: fixed;
+      top: 5px;
+      left: 5px;
+    }
+  </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+
+    .posts {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .post {
+      margin: 10px;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__category {
+      margin: 50px 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .header__category img {
+      max-width: 150px;
+      margin: 10px 0;
+    }
+    .title__category {
+      color: rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .embed__post {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      max-width: 90vw;
+      overflow: hidden;
+    }
+    .embed__titles {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .embed__title {
+      font-size: 25px;
+      font-weight: 500;
+    }
+    .embed__subtitle {
+      font-size: 21px;
+      font-weight: 500;
+    }
+    .embed__content {
+      margin: 0;
+    }
+
+    .ft__content {
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+    }
+
+    .ft__post {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      min-width: 300px;
+      max-width: 650px;
+      width: 100%;
+    }
+    .ft__img {
+      -webkit-box-ordinal-group: 1;
+      -moz-box-ordinal-group: 1;
+      -ms-flex-order: 1;
+      -webkit-order: 1;
+      order: 1;
+      flex-basis: calc(40% - 1px);
+      flex-shrink: 0;
+      border: 1px solid #ccc;
+      border-right: 0;
+    }
+    .ft__img a {
+      display: block;
+      position: relative;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .ft__img a div {
+      align-items: center;
+      background-color: #e2e2e2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .ft__img a div img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: 300px;
+    }
+
+    .ft__img div {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-y: center;
+      background-position-x: center;
+    }
+
+    .ft__text-content {
+      -webkit-box-ordinal-group: 2;
+      -moz-box-ordinal-group: 2;
+      -ms-flex-order: 2;
+      -webkit-order: 2;
+      order: 2;
+      flex-basis: calc(60% - 1px);
+      flex-shrink: 0;
+      border-left: 0;
+      padding: 10px;
+      box-sizing: border-box;
+
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+
+    .ft__post-category {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .ft__post-category img {
+      max-height: 30px;
+      margin-right: 10px;
+    }
+
+    .ft__post-title {
+      text-decoration: none;
+      font-size: 20px;
+      color: rgba(0, 0, 0, 0.8);
+    }
+    .ft__post-title p,
+    .ft__subtitle {
+      padding: 0;
+      margin: 0;
+      margin-top: 6px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -khtml-box-orient: vertical;
+      -moz-box-orient: vertical;
+      -ms-box-orient: vertical;
+      -o-box-orient: vertical;
+      box-orient: vertical;
+      -webkit-line-clamp: 2;
+      -khtml-line-clamp: 2;
+      -moz-line-clamp: 2;
+      -ms-line-clamp: 2;
+      -o-line-clamp: 2;
+      line-clamp: 2;
+    }
+
+    .ft__author {
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.5);
+      margin: 0;
+    }
+
+    .archive__newsletter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      margin: 10px;
+      margin-bottom: 50px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    .archive__newsletter form {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .archive__newsletter form .f__email {
+      border-color: transparent;
+      border-bottom: solid 1px rgba(0, 0, 0, 0.4);
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: transparent;
+      transition: 0.2s;
+    }
+    .archive__newsletter form .f__email:focus {
+      border: solid 1px rgba(0, 0, 0, 0.4);
+    }
+
+    .archive__newsletter form .f__submit {
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.5);
+    }
+    .archive__newsletter form .f__submit:focus,
+    .archive__newsletter form .f__submit:hover {
+      border-color: transparent;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 575.98px) {
+      .ft__post {
+        flex-direction: column-reverse;
+        margin: 10px;
+      }
+
+      .ft__img {
+        width: 100%;
+        flex: 1;
+      }
+
+      .ft__text-content {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .ft__text-content .ft__post-category {
+        margin-bottom: 20px;
+      }
+      .ft__text-content .ft__author {
+        margin-top: 20px;
+      }
+    }
+  </style>
+  <style>
+    .loading-content,
+    .no-more-data {
+      font-family: "Roboto", sans-serif;
+
+      margin: 0 auto;
+      width: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px 0;
+    }
+
+    .loading-content.l-show {
+      display: flex;
+    }
+
+    .loading-text {
+      margin: 0;
+      margin-left: 20px;
+    }
+
+    #loading {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #000;
+      animation: spin 1.2s linear infinite;
+      -webkit-animation: spin 1.2s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    div.no-more-data p {
+      margin: 0;
+      text-align: center;
+    }
+
+    div.no-more-data.nmd-show {
+      display: flex;
+    }
+  </style>
+  <style>
+    .embed__post_v2 {
+      width: 100%;
+      display: block;
+      /* height: 300px; */
+    }
+
+    .embedded-content {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .embedded-content iframe,
+    .embedded-content object,
+    .embedded-content embed {
+      position: absolute;
+      height: 100%;
+      width: 60%;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+    }
+
+    .yt-embed.embedded-content iframe,
+    .yt-embed.embedded-content object,
+    .yt-embed.embedded-content embed {
+
+      width: 100%;
+
+    }
+
+
+  </style>
+
+  <body>
+    <!-- <button class="btn">Teste</button> -->
+    <div class="posts" onscroll="scrollPosts()">
+      <span id="" style="display: none">198</span>
+    </div>
+    <div class="loading-content">
+      <div id="loading"></div>
+      <p class="loading-text">Carregando mais dados</p>
+    </div>
+    <div class="no-more-data">
+      <p>Fim dos posts</p>
+    </div>
+
+    <script src="https://platform.instagram.com/en_US/embeds.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      window.twttr = (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function (f) {
+          t._e.push(f);
+        };
+
+        return t;
+      })(document, "script", "twitter-wjs");
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
